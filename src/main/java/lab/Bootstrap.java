@@ -1,6 +1,8 @@
 package lab;
 import lab.models.IFunc;
 import lab.modules.RectangleIntegral;
+import lab.modules.SimpsonsIntegral;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +11,8 @@ import java.util.Scanner;
 public class Bootstrap {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Нахождение интегралов методом прямоугольников(левых, правых, средних)");
+        System.out.println("Нахождение интегралов методом прямоугольников(левых, правых, средних) и методом Симпсона");
+        System.out.println("Выберите уравнение:");
         Map<String, IFunc> funcs = new HashMap<>();
         // 1
         funcs.put("sin(x)/x", x -> Math.sin(x)/x);
@@ -34,11 +37,11 @@ public class Bootstrap {
             System.out.println("Выберите метод:");
             if(scanner.nextLine().equals("1")) {
                 System.out.println("Решение методом прямоугольников:");
-                RectangleIntegral.solve(func1);
+                RectangleIntegral.execute(func1);
             }
             else {
                 System.out.println("Решение методом Симпсона:");
-
+                SimpsonsIntegral.execute(func1);
             }
         } catch (Exception e) {
             System.out.println("Нет такого уравнения");

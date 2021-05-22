@@ -8,7 +8,7 @@ import static lab.modules.FindSeparation.findSeparations;
 
 public class RectangleIntegral {
     static Scanner scanner = new Scanner(System.in);
-    public static void solve(IFunc f){
+    public static void execute(IFunc f){
         System.out.println("Введите a:");
         double a = Double.parseDouble(scanner.nextLine());
         System.out.println("Введите b:");
@@ -189,6 +189,7 @@ public class RectangleIntegral {
         return resultSet;
     }
 }
+
 class RectangleResult {
     private double left;
     private double right;
