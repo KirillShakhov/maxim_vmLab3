@@ -13,25 +13,57 @@ public class RectangleIntegral {
         double a = Double.parseDouble(scanner.nextLine());
         System.out.println("Введите b:");
         double b = Double.parseDouble(scanner.nextLine());
-        System.out.println("Введите погрешность:");
-        double eps = Double.parseDouble(scanner.nextLine());
-        ArrayList<Separation> array = findSeparations(f, a, b);
-        double sum_left = 0.0d;
-        double sum_right = 0.0d;
-        double sum_mid = 0.0d;
-        for(Separation s : array){
-            RectangleResult result = solve(f, s.getLeft(), s.getRight(), eps);
-            sum_left += result.getLeft();
-            sum_right += result.getRight();
-            sum_mid += result.getMid();
-            System.out.println("Результаты для отрезка от "+s.getLeft()+" до "+s.getRight()+":");
-            System.out.println("Левые прямоугольники: "+String.format("%.8f", result.getLeft())+" eps: "+String.format("%.8f", result.getEpsLeft()));
-            System.out.println("Правые прямоугольники: "+String.format("%.8f", result.getRight())+" eps: "+String.format("%.8f", result.getEpsRight()));
-            System.out.println("Средние прямоугольники: "+String.format("%.8f", result.getMid())+" eps: "+String.format("%.8f", result.getEpsMid()));
+        while (true) {
+            System.out.println("Выберите вариант подсчета:\n1. Подсчитать по точности\n2. Подсчитать по количеству шагов");
+            String ss = scanner.nextLine();
+            if (ss.equals("1")){
+                System.out.println("Введите погрешность:");
+                double eps = Double.parseDouble(scanner.nextLine());
+                ArrayList<Separation> array = findSeparations(f, a, b);
+                double sum_left = 0.0d;
+                double sum_right = 0.0d;
+                double sum_mid = 0.0d;
+                for(Separation s : array){
+                    RectangleResult result = solve(f, s.getLeft(), s.getRight(), eps);
+                    sum_left += result.getLeft();
+                    sum_right += result.getRight();
+                    sum_mid += result.getMid();
+                    System.out.println("Результаты для отрезка от "+s.getLeft()+" до "+s.getRight()+":");
+                    System.out.println("Левые прямоугольники: "+String.format("%.8f", result.getLeft())+" eps: "+String.format("%.8f", result.getEpsLeft()));
+                    System.out.println("Правые прямоугольники: "+String.format("%.8f", result.getRight())+" eps: "+String.format("%.8f", result.getEpsRight()));
+                    System.out.println("Средние прямоугольники: "+String.format("%.8f", result.getMid())+" eps: "+String.format("%.8f", result.getEpsMid()));
+                }
+                System.out.println("Сумма для метода левых прямоугольников: "+sum_left);
+                System.out.println("Сумма для метода правых прямоугольников: "+sum_right);
+                System.out.println("Сумма для метода средних прямоугольников: "+sum_mid);
+            }else if (ss.equals("2")){
+                System.out.println("Введите количество шагов n:");
+                int n = Integer.parseInt(scanner.nextLine());
+                ArrayList<Separation> array = findSeparations(f, a, b);
+                double sum_left = 0.0d;
+                double sum_right = 0.0d;
+                double sum_mid = 0.0d;
+                for(Separation s : array){
+                    double left = left_rectangle_integral(f, s.getLeft(), s.getRight(), n);
+                    double right = right_rectangle_integral(f, s.getLeft(), s.getRight(), n);
+                    double mid = mid_rectangle_integral(f, s.getLeft(), s.getRight(), n);
+                    sum_left += left;
+                    sum_right += right;
+                    sum_mid += mid;
+                    System.out.println("Результаты для отрезка от "+s.getLeft()+" до "+s.getRight()+":");
+                    System.out.println("Левые прямоугольники: "+String.format("%.8f", left));
+                    System.out.println("Правые прямоугольники: "+String.format("%.8f", right));
+                    System.out.println("Средние прямоугольники: "+String.format("%.8f", mid));
+                }
+                System.out.println("Сумма для метода левых прямоугольников: "+sum_left);
+                System.out.println("Сумма для метода правых прямоугольников: "+sum_right);
+                System.out.println("Сумма для метода средних прямоугольников: "+sum_mid);
+            }else{
+                System.out.println("Такого варианта нет. Введите 1 или 2.");
+                continue;
+            }
+            break;
         }
-        System.out.println("Сумма для метода левых прямоугольников: "+sum_left);
-        System.out.println("Сумма для метода правых прямоугольников: "+sum_right);
-        System.out.println("Сумма для метода средних прямоугольников: "+sum_mid);
     }
     //функция для вычисления интеграла методом левых прямоугольников
     static double left_rectangle_integral(IFunc f, double a, double b, int n) {

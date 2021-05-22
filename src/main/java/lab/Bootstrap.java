@@ -2,7 +2,6 @@ package lab;
 import lab.models.IFunc;
 import lab.modules.RectangleIntegral;
 import lab.modules.SimpsonsIntegral;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +33,7 @@ public class Bootstrap {
         try {
             IFunc func1 = funcs.get(keys.get(Integer.parseInt(str) - 1));
 
-            System.out.println("Выберите метод:");
+            System.out.println("Выберите метод:\n1. Метод прямоугольников\n2. Метод Симпсона");
             if(scanner.nextLine().equals("1")) {
                 System.out.println("Решение методом прямоугольников:");
                 RectangleIntegral.execute(func1);
