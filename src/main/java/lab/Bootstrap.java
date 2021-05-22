@@ -22,6 +22,8 @@ public class Bootstrap {
         funcs.put("-x^3 - x^2 - 2x + 1", x -> -Math.pow(x, 3)-Math.pow(x, 2)-(2*x)+1);
         //
         funcs.put("2x", x -> 2*x);
+        //
+        funcs.put("sin(x)", Math::sin);
 
         /*
         Вывод и обработка ввода. Не трогать.
