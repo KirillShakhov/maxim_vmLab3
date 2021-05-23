@@ -26,6 +26,7 @@ public class SimpsonsIntegral {
                     sum_mid += result.getRes();
                     System.out.println("Результаты для отрезка от "+s.getLeft()+" до "+s.getRight()+":");
                     System.out.println("Метод Симпсона: "+String.format("%.8f", result.getRes())+" eps: "+String.format("%.8f", result.getResEps()));
+                    System.out.println("Количество шагов, которое понадобилось для достижения точности: "+result.getN());
                 }
                 System.out.println("Сумма для метода Симпсона: "+sum_mid);
             }else if (ss.equals("2")){
@@ -62,7 +63,7 @@ public class SimpsonsIntegral {
         }
         while (Math.abs(s1 - s) > eps);  //сравнение приближений с заданной точностью
         resultSet.setRes(s1);
-
+        resultSet.setN(iter);
         // left eps
         iter*=2;
         n = 1; //начальное число шагов
@@ -92,10 +93,13 @@ public class SimpsonsIntegral {
 class SimpsonsResult {
     private double res;
     private double resEps;
+    private double n;
     public SimpsonsResult() { }
     public double getRes() { return res; }
     public void setRes(double res) { this.res = res;  }
     public double getResEps() { return resEps; }
     public void setResEps(double resEps) { this.resEps = resEps; }
+    public void setN(double n){ this.n = n; }
+    public double getN(){ return n; }
 }
 

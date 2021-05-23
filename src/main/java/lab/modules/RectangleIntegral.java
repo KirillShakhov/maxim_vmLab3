@@ -151,7 +151,7 @@ public class RectangleIntegral {
         }
         while (Math.abs(s1 - s) > eps);  //сравнение приближений с заданной точностью
         resultSet.setLeft(s1);
-
+        resultSet.setLeft_n(iter);
         // left eps
         iter*=2;
         n = 1; //начальное число шагов
@@ -178,7 +178,7 @@ public class RectangleIntegral {
         }
         while (Math.abs(s1 - s) > eps);  //сравнение приближений с заданной точностью
         resultSet.setRight(s1);
-
+        resultSet.setRight_n(iter);
         // right eps
         iter*=2;
         n = 1; //начальное число шагов
@@ -205,7 +205,7 @@ public class RectangleIntegral {
         }
         while (Math.abs(s1 - s) > eps);  //сравнение приближений с заданной точностью
         resultSet.setMid(s1);
-
+        resultSet.setMid_n(iter);
         // mid eps
         iter *= 2;
         n = 1; //начальное число шагов
@@ -226,6 +226,9 @@ class RectangleResult {
     private double left;
     private double right;
     private double mid;
+    private double left_n;
+    private double right_n;
+    private double mid_n;
     private double epsLeft;
     private double epsRight;
     private double epsMid;
@@ -283,6 +286,30 @@ class RectangleResult {
 
     public void setEpsMid(double epsMid) {
         this.epsMid = epsMid;
+    }
+
+    public double getLeft_n() {
+        return left_n;
+    }
+
+    public void setLeft_n(double left_n) {
+        this.left_n = left_n;
+    }
+
+    public double getRight_n() {
+        return right_n;
+    }
+
+    public void setRight_n(double right_n) {
+        this.right_n = right_n;
+    }
+
+    public double getMid_n() {
+        return mid_n;
+    }
+
+    public void setMid_n(double mid_n) {
+        this.mid_n = mid_n;
     }
 }
 
